@@ -1,5 +1,5 @@
 import './index.less';
-import logo from '../../assets/userLogo.jpeg';
+import logo from '../../assets/userLogo.jpg';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -204,20 +204,20 @@ class Index extends Component {
         gl_FragColor = vec4(col * 0.5, 1.0);
     }`;
     let fx_brightbuf_fsh = `
-    #ifdef GL_ES
-    //precision mediump float;
-    precision highp float;
-    #endif
-    uniform sampler2D uSrc;
-    uniform vec2 uDelta;
-
-    varying vec2 texCoord;
-    varying vec2 screenCoord;
-
-    void main(void) {
-        vec4 col = texture2D(uSrc, texCoord);
-        gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
-    }`;
+      #ifdef GL_ES
+      //precision mediump float;
+      precision highp float;
+      #endif
+      uniform sampler2D uSrc;
+      uniform vec2 uDelta;
+  
+      varying vec2 texCoord;
+      varying vec2 screenCoord;
+  
+      void main(void) {
+          vec4 col = texture2D(uSrc, texCoord);
+          gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
+      }`;
     let fx_dirblur_r4_fsh = `
     #ifdef GL_ES
     //precision mediump float;

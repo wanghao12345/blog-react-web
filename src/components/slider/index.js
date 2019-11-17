@@ -1,5 +1,5 @@
 import './index.less';
-import logo from '../../assets/userLogo.jpeg';
+import logo from '../../assets/userLogo.jpg';
 import BiaoChenXuYing from '../../assets/BiaoChenXuYing.png';
 import YingHeZaHuoPu from '../../assets/YingHeZaHuoPu.png';
 import React, { Component } from 'react';
