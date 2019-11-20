@@ -1,16 +1,14 @@
 import Header from './header'
 import Footer from './footer'
-
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-}
+import '../static/assets/reset.less'
+import '../static/assets/layout.less'
 
 const Layout = (props) => (
-  <div style={layoutStyle}>
+  <div>
     <Header />
-    {props.children}
+    <div className="layout-wrapper">
+      {props.children}
+    </div>
     <Footer />
   </div>
 )

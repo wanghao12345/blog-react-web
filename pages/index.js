@@ -11,10 +11,7 @@ const SubLink = props => (
 
 const Index = () => (
   <Layout>
-      <p>hello next</p>
-      <SubLink as="1" id="1" />
-      <SubLink as="2" id="2" />
-      <SubLink as="3" id="3" />
+    首页
   </Layout>
 )
 
