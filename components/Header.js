@@ -5,13 +5,20 @@ import '../static/assets/header.less'
 
 export default class Header extends Component{
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      navList: []
+    }
+  }
+
+
   componentDidMount() {
-    getTypeList().then(res => {
-      console.log(res);
-    })
+    this.getTypeListData()
   }
 
   render() {
+    const { navList } = this.state
     return (
       <div className="header-wrapper">
         <div className="header-content-box">
@@ -22,16 +29,12 @@ export default class Header extends Component{
               </Link>
             </div>
             <div className="type-box">
-              <Link href="/">
-                <a className="type-item">前端文章</a>
-              </Link>
-              <Link href="/about">
-                <a className="type-item">后端文章</a>
-              </Link>
+              {
+                navList.map((item) => {
+                  return (<span className="type-item" key={item.id}>{item.name}</span>)
+                })
+              }
             </div>
-
-
-
           </div>
           <div className="right-header-box">
 
@@ -39,5 +42,19 @@ export default class Header extends Component{
         </div>
       </div>
     )
+  }
+
+
+  /**
+   * 获取类型列表
+   */
+  getTypeListData () {
+    getTypeList().then(res => {
+      if (res.status === 200) {
+        this.setState({
+          navList: res.data.result.list
+        })
+      }
+    })
   }
 }

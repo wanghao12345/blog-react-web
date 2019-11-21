@@ -31,7 +31,7 @@ service.interceptors.response.use(
     if (response.data.code === 0) {
       message.error(response.data.message)
     }
-    return response
+    return response.data
   },
   error => {
     if (error.response) {
