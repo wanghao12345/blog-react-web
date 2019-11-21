@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
+import { Button } from 'antd'
 import { getTypeList } from '../api/header'
 import '../static/assets/header.less'
 
@@ -37,7 +38,12 @@ export default class Header extends Component{
             </div>
           </div>
           <div className="right-header-box">
-
+            <Button
+              type="primary"
+              icon="poweroff"
+            >
+              Click me!
+            </Button>
           </div>
         </div>
       </div>
