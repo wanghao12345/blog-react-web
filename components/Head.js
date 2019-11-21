@@ -9,7 +9,7 @@ const MyHead = ()=>(
     <meta name="renderer" content="webkit"/>
     <meta name="Keywords" content={config.keyWords}/>
     <meta name="Description" content={config.description}/>
-    <link href="https://unpkg.com/antd@3.12.1/dist/antd.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.23.6/antd.min.css" rel="stylesheet"/>
     <link rel='shortcut icon' type='image/x-icon' href={config.favicon} />
     <title>{config.websiteTitle}</title>
   </Head>

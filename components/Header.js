@@ -40,9 +40,15 @@ export default class Header extends Component{
           <div className="right-header-box">
             <Button
               type="primary"
-              icon="poweroff"
+              icon="login"
             >
-              Click me!
+              登录
+            </Button>
+            <Button
+              type="danger"
+              icon="logout"
+            >
+              登出
             </Button>
           </div>
         </div>
