@@ -17,6 +17,12 @@ export default class Header extends Component{
   componentDidMount() {
     this.getTypeListData()
   }
+  componentWillUnmount() {
+    this.setState = () => {
+      return;
+    }
+  }
+
 
   render() {
     const { navList } = this.state
@@ -32,7 +38,11 @@ export default class Header extends Component{
             <div className="type-box">
               {
                 navList.map((item) => {
-                  return (<span className="type-item" key={item.id}>{item.name}</span>)
+                  return (
+                    <Link as={`/article/${item.id}`}  href={`/article?id=${item.id}`} key={item.id}>
+                      <span className="type-item">{item.name}</span>
+                    </Link>
+                  )
                 })
               }
             </div>

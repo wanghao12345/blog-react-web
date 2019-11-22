@@ -14,8 +14,14 @@ app.prepare()
 
 
     server.get('/post/:id', (req, res) => {
-      //将/p/:id的路径切换成/post?title=req.params.id的路径
       app.render(req, res, '/post', {id: req.params.id})
+    })
+
+    server.get('/article/:id', (req, res) => {
+      const actualPage = '/article';
+      const queryParams = { id: req.params.id }
+      console.log(req.params.id);
+      app.render(req, res, actualPage, queryParams)
     })
 
     server.get('*', (req, res) => {
