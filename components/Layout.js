@@ -10,7 +10,10 @@ const Layout = (props) => (
     <Header />
     <div className="layout-wrapper">
       <Head />
-      {props.children}
+      <div className="main-content-wrapper">
+		{props.children}
+      </div>
+      <div className="advert-wrapper"></div>
     </div>
     <Footer />
   </div>

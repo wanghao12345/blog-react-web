@@ -3,6 +3,8 @@ import { withRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import { getArticleList } from '../../api/article'
 
+import './index.less'
+
 
 class Article extends Component{
   constructor(props) {
@@ -17,19 +19,8 @@ class Article extends Component{
 
   static async getInitialProps(context) {
     const {  id } = context.query;
-    let listData = []
-
-    getArticleList({
-      id: id
-    }).then(res => {
-      console.log(res);
-      if (res.status === 200) {
-        listData = res.data.result
-      }
-    })
-
-
-    return { listData, currentTypeId: id }
+    let res = await getArticleList({id: id})
+     return { listData: res, currentTypeId: id }
   }
 
   componentWillUnmount() {
@@ -40,10 +31,29 @@ class Article extends Component{
 
 
   render() {
-    const { currentTypeId } = this.props
+    const { currentTypeId, listData } = this.props
+    const listArr = listData.data.result.list
+
+    const articleItem = listArr.map((item) => {
+      return (
+        <div className="article-item-box" key={item.id}>
+          <div className="article-item-img">
+            <img src="" alt="文章图片" />
+          </div>
+          <div className="article-item-content">
+
+          </div>
+        </div>
+      )
+    })
+
+
+
     return (
       <Layout>
-        <div>文章列表 { currentTypeId }</div>
+        <div className="article-list-wrapper">
+          { articleItem }
+        </div>
       </Layout>
     )
   }
