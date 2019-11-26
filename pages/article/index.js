@@ -13,16 +13,28 @@ class Article extends Component{
   constructor(props) {
     super(props)
     this.state = {
-
+      hasNextPage: true,
+      articleList: [],
+      currentPageNum: 1
     }
+
+    this.handleLoadNextPage = this.handleLoadNextPage.bind(this)
+    this.getArticleListData = this.getArticleListData.bind(this)
   }
   componentDidMount() {
-    // this.getArticleListData()
+    const { listData } = this.props
+    this.setState({
+      articleList: listData.data.result.list
+    })
   }
 
   static async getInitialProps(context) {
     const {  id } = context.query;
-    let res = await getArticleList({id: id})
+    let res = await getArticleList({
+      id: id,
+      p: 1,
+      size: 10
+    })
      return { listData: res, currentTypeId: id }
   }
 
@@ -34,10 +46,7 @@ class Article extends Component{
 
 
   render() {
-    const { currentTypeId, listData } = this.props
-    const listArr = listData.data.result.list
-
-    const articleItem = listArr.map((item) => {
+    const articleItem = this.state.articleList.map((item) => {
       return (
         <div className="article-item-box" key={item.id}>
           <div className="article-item-img">
@@ -59,26 +68,47 @@ class Article extends Component{
       )
     })
 
-
-
     return (
       <Layout>
         <div className="article-list-wrapper">
           { articleItem }
+          <div className="aricle-list-bottom">
+            {
+              this.state.hasNextPage ? (<span onClick={this.handleLoadNextPage}>查看更多</span>) :
+              (<span>已经到底了</span>)
+            }
+          </div>
         </div>
       </Layout>
     )
   }
 
-
+  /**
+   * 加载下一页
+   */
+  handleLoadNextPage () {
+    const { currentTypeId } = this.props;
+    const nextPage = this.state.currentPageNum + 1
+    const param = {
+      id: currentTypeId,
+      p: nextPage,
+      size: 10
+    }
+    this.getArticleListData(param)
+  }
   /**
    * 获取该类型的文章列表
    */
-  getArticleListData (id) {
-    getArticleList({
-      id: id
-    }).then(res => {
-      console.log(res);
+  getArticleListData (param) {
+    getArticleList(param).then(res => {
+      if (res.status === 200) {
+        const arr = this.state.articleList.concat(res.data.result.list)
+        this.setState({
+          articleList: arr,
+          currentPageNum: res.data.result.pageNum,
+          hasNextPage: res.data.result.hasNextPage
+        })
+      }
     })
   }
 
