@@ -5,6 +5,7 @@ import { getArticleList } from '../../api/article'
 
 import { baseUrl } from '../../config/env'
 import { Icon } from 'antd'
+import Router from 'next/router'
 
 import './index.less'
 
@@ -20,6 +21,7 @@ class Article extends Component{
 
     this.handleLoadNextPage = this.handleLoadNextPage.bind(this)
     this.getArticleListData = this.getArticleListData.bind(this)
+    this.handleRouterDetailClick = this.handleRouterDetailClick.bind(this)
   }
   componentDidMount() {
     const { listData } = this.props
@@ -48,7 +50,11 @@ class Article extends Component{
   render() {
     const articleItem = this.state.articleList.map((item) => {
       return (
-        <div className="article-item-box" key={item.id}>
+        <div 
+          className="article-item-box" 
+          key={item.id}
+          onClick={this.handleRouterDetailClick(item.id)}
+        >
           <div className="article-item-img">
             <img src={baseUrl + item.coverImage} alt="文章图片" />
           </div>
@@ -110,6 +116,21 @@ class Article extends Component{
         })
       }
     })
+  }
+
+  /**
+   * 跳到文章详情
+   * @param {文章id} id 
+   */
+  handleRouterDetailClick (id) {
+    return () => {
+      Router.push({
+        pathname: '/detail',
+        query: {
+          id: id
+        }
+      })
+    }
   }
 
 }
