@@ -26,7 +26,9 @@ class Article extends Component{
   componentDidMount() {
     const { listData } = this.props
     this.setState({
-      articleList: listData.data.result.list
+      articleList: listData.data.result.list,
+      currentPageNum: listData.data.result.pageNum,
+      hasNextPage: listData.data.result.hasNextPage
     })
   }
 
