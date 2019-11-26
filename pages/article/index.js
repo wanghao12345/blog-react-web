@@ -3,6 +3,8 @@ import { withRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import { getArticleList } from '../../api/article'
 
+import { baseUrl } from '../../config/env'
+
 import './index.less'
 
 
@@ -38,10 +40,19 @@ class Article extends Component{
       return (
         <div className="article-item-box" key={item.id}>
           <div className="article-item-img">
-            <img src="" alt="文章图片" />
+            <img src={baseUrl + item.coverImage} alt="文章图片" />
           </div>
           <div className="article-item-content">
-
+              <div className="article-item-title">{item.title}</div>
+              <div className="article-item-description">{item.description}</div>
+              <div className="article-item-status">
+                <div className="article-look"></div>
+                <div className="article-commont"></div>
+                <div className="article-love"></div>
+                <div className="article-time">
+                  {item.createTime}
+                </div>
+              </div>
           </div>
         </div>
       )

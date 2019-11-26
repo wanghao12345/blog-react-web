@@ -13,16 +13,16 @@ export default class Header extends Component{
     }
   }
 
-
   componentDidMount() {
     this.getTypeListData()
   }
+
+
   componentWillUnmount() {
     this.setState = () => {
       return;
     }
   }
-
 
   render() {
     const { navList } = this.state
