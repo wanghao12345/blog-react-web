@@ -4,6 +4,7 @@ import Layout from '../../components/Layout'
 import { getArticleList } from '../../api/article'
 
 import { baseUrl } from '../../config/env'
+import { Icon } from 'antd'
 
 import './index.less'
 
@@ -46,9 +47,9 @@ class Article extends Component{
               <div className="article-item-title">{item.title}</div>
               <div className="article-item-description">{item.description}</div>
               <div className="article-item-status">
-                <div className="article-look"></div>
-                <div className="article-commont"></div>
-                <div className="article-love"></div>
+                <div className="article-look"><Icon type="eye" />321</div>
+                <div className="article-commont"><Icon type="form" />4</div>
+                <div className="article-love"><Icon type="heart" />0</div>
                 <div className="article-time">
                   {item.createTime}
                 </div>
