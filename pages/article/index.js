@@ -7,9 +7,24 @@ import { baseUrl } from '../../config/env'
 import { Icon } from 'antd'
 import Router from 'next/router'
 
+import { connect } from 'react-redux'
+
 import './index.less'
 
 
+const mapStateToProps = (state) => {
+  return {
+    articles: state.article.articles,
+    page: state.article.page
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+}
+
+
+@connect(mapStateToProps, mapDispatchToProps)
 class Article extends Component{
   constructor(props) {
     super(props)

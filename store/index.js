@@ -9,6 +9,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import reducer from './reducer'
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
+const configureStore = () => {
+  const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
+  return store
+}
 
-export default store
+export default configureStore
