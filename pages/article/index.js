@@ -23,21 +23,13 @@ class Article extends Component{
     this.getArticleListData = this.getArticleListData.bind(this)
     this.handleRouterDetailClick = this.handleRouterDetailClick.bind(this)
   }
-  componentDidMount() {
-    const { listData } = this.props
-    this.setState({
-      articleList: listData.data.result.list,
-      currentPageNum: listData.data.result.pageNum,
-      hasNextPage: listData.data.result.hasNextPage
-    })
-  }
 
   static async getInitialProps(context) {
     const {  id } = context.query;
     let res = await getArticleList({
       id: id,
       p: 1,
-      size: 10
+      size: 2
     })
      return { listData: res, currentTypeId: id }
   }
@@ -48,9 +40,16 @@ class Article extends Component{
     }
   }
 
-
   render() {
-    const articleItem = this.state.articleList.map((item) => {
+    const { listData } = this.props
+    let articleList = []
+    if (this.state.currentPageNum === 1) {
+      articleList = listData.data.result.list
+    } else {
+      articleList = this.state.articleList
+    }
+
+    const articleItem = articleList.map((item) => {
       return (
         <div 
           className="article-item-box" 
@@ -95,12 +94,20 @@ class Article extends Component{
    * 加载下一页
    */
   handleLoadNextPage () {
-    const { currentTypeId } = this.props;
-    const nextPage = this.state.currentPageNum + 1
+    const { currentTypeId, listData } = this.props;
+    const { currentPageNum } = this.state
+
+    if (currentPageNum === 1) {
+      this.setState({
+        articleList: listData.data.result.list
+      })
+    }
+
+    const nextPage = currentPageNum + 1
     const param = {
       id: currentTypeId,
       p: nextPage,
-      size: 10
+      size: 2
     }
     this.getArticleListData(param)
   }
