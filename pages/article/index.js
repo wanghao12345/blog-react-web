@@ -11,20 +11,6 @@ import { connect } from 'react-redux'
 
 import './index.less'
 
-
-const mapStateToProps = (state) => {
-  return {
-    articles: state.article.articles,
-    page: state.article.page
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-
-}
-
-
-@connect(mapStateToProps, mapDispatchToProps)
 class Article extends Component{
   constructor(props) {
     super(props)
@@ -40,13 +26,19 @@ class Article extends Component{
   }
 
   static async getInitialProps(context) {
-    const {  id } = context.query;
+    const { query, store} = context
+    const {  id } = query;
     let res = await getArticleList({
       id: id,
       p: 1,
       size: 2
     })
      return { listData: res, currentTypeId: id }
+  }
+
+  componentDidMount () {
+    const { article } = this.props
+    console.log('数据：' + article)
   }
 
   componentWillUnmount() {
@@ -159,4 +151,19 @@ class Article extends Component{
 
 }
 
-export default withRouter(Article)
+
+const mapStateToProps = (state) => {
+  return {
+    articles: state.article.articles,
+    page: state.article.page
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Article))

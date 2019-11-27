@@ -6,10 +6,6 @@ import withRedux from "next-redux-wrapper"
 import createStore from '../store'
 
 class MyApp extends App {
-  componentDidMount() {
-    console.log('走，你')
-  }
-
 
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
