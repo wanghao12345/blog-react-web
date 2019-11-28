@@ -36,7 +36,7 @@ class Article extends Component{
     dispatch(action.storeArticles(list))
     dispatch(action.storeHasNextPage(hasNextPage))
 
-     return { listData: res, currentTypeId: id }
+    return { listData: res, currentTypeId: id }
   }
 
   componentDidMount () {

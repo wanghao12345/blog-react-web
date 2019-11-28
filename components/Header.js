@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 import { Button } from 'antd'
 import { getTypeList } from '../api/header'
 import '../static/assets/header.less'
@@ -51,6 +52,11 @@ export default class Header extends Component{
             <Button
               type="primary"
               icon="login"
+              onClick={() => {
+                Router.push({
+                  pathname: '/login'
+                })
+              }}
             >
               登录
             </Button>
