@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Layout from '../../components/Layout'
+import './index.less'
 
 class Login extends Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class Login extends Component {
   render () {
     return (
       <Layout>
-        <div>
+        <div className="login-wrapper">
           登录
         </div>
       </Layout>  
