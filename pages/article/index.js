@@ -8,18 +8,13 @@ import { Icon } from 'antd'
 import Router from 'next/router'
 
 import { connect } from 'react-redux'
+import { action } from '../../store/article'
 
 import './index.less'
 
 class Article extends Component{
   constructor(props) {
     super(props)
-    this.state = {
-      hasNextPage: true,
-      articleList: [],
-      currentPageNum: 1
-    }
-
     this.handleLoadNextPage = this.handleLoadNextPage.bind(this)
     this.getArticleListData = this.getArticleListData.bind(this)
     this.handleRouterDetailClick = this.handleRouterDetailClick.bind(this)
@@ -28,17 +23,25 @@ class Article extends Component{
   static async getInitialProps(context) {
     const { query, store} = context
     const {  id } = query;
+    const { dispatch } = store;
     let res = await getArticleList({
       id: id,
       p: 1,
       size: 2
     })
+
+    const {list, hasNextPage} = res.data.result
+
+    dispatch(action.storePage(1))
+    dispatch(action.storeArticles(list))
+    dispatch(action.storeHasNextPage(hasNextPage))
+
      return { listData: res, currentTypeId: id }
   }
 
   componentDidMount () {
-    const { article } = this.props
-    console.log('数据：' + article)
+    const { articles } = this.props
+    console.log('数据：' + articles)
   }
 
   componentWillUnmount() {
@@ -48,15 +51,8 @@ class Article extends Component{
   }
 
   render() {
-    const { listData } = this.props
-    let articleList = []
-    if (this.state.currentPageNum === 1) {
-      articleList = listData.data.result.list
-    } else {
-      articleList = this.state.articleList
-    }
-
-    const articleItem = articleList.map((item) => {
+    const { articles, hasNextPage } = this.props
+    const articleItem = articles.map((item) => {
       return (
         <div 
           className="article-item-box" 
@@ -88,7 +84,7 @@ class Article extends Component{
           { articleItem }
           <div className="aricle-list-bottom">
             {
-              this.state.hasNextPage ? (<span onClick={this.handleLoadNextPage}>查看更多</span>) :
+              hasNextPage ? (<span onClick={this.handleLoadNextPage}>查看更多</span>) :
               (<span>已经到底了</span>)
             }
           </div>
@@ -101,16 +97,9 @@ class Article extends Component{
    * 加载下一页
    */
   handleLoadNextPage () {
-    const { currentTypeId, listData } = this.props;
-    const { currentPageNum } = this.state
+    const { currentTypeId, page } = this.props;
 
-    if (currentPageNum === 1) {
-      this.setState({
-        articleList: listData.data.result.list
-      })
-    }
-
-    const nextPage = currentPageNum + 1
+    const nextPage = page + 1
     const param = {
       id: currentTypeId,
       p: nextPage,
@@ -122,14 +111,13 @@ class Article extends Component{
    * 获取该类型的文章列表
    */
   getArticleListData (param) {
+    const { articles, storePage, storeArticles, storeHasNextPage } = this.props
     getArticleList(param).then(res => {
+      const {pageNum, list, hasNextPage} = res.data.result
       if (res.status === 200) {
-        const arr = this.state.articleList.concat(res.data.result.list)
-        this.setState({
-          articleList: arr,
-          currentPageNum: res.data.result.pageNum,
-          hasNextPage: res.data.result.hasNextPage
-        })
+        storePage(pageNum)
+        storeArticles(articles.concat(list))
+        storeHasNextPage(hasNextPage)
       }
     })
   }
@@ -154,14 +142,17 @@ class Article extends Component{
 
 const mapStateToProps = (state) => {
   return {
-    articles: state.article.articles,
-    page: state.article.page
+    articles: state.article.get('articles'),
+    page: state.article.get('page'),
+    hasNextPage: state.article.get('hasNextPage')
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    storeArticles: (articles) => {dispatch(action.storeArticles(articles))},
+    storePage: (page) => {dispatch(action.storePage(page))},
+    storeHasNextPage: (hasNextPage) => {dispatch(action.storeHasNextPage(hasNextPage))}
   }
 }
 
