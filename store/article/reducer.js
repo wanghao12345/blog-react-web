@@ -7,6 +7,7 @@ const defaultStore = fromJS({
   hasNextPage: true
 })
 
+
 export default (state = defaultStore, action) => {
   switch (action.type) {
     case constants.STORE_ARTICLES:

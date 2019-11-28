@@ -6,7 +6,7 @@ import withRedux from "next-redux-wrapper"
 import createStore from '../store'
 
 class MyApp extends App {
-
+  
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
 

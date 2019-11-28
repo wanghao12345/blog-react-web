@@ -40,8 +40,7 @@ class Article extends Component{
   }
 
   componentDidMount () {
-    const { articles } = this.props
-    console.log('数据：' + articles)
+   
   }
 
   componentWillUnmount() {
