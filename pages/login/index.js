@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Layout from '../../components/Layout'
-import './index.less'
+import '../../static/assets/login.less'
 
 class Login extends Component {
   constructor (props) {

@@ -10,7 +10,7 @@ import Router from 'next/router'
 import { connect } from 'react-redux'
 import { action } from '../../store/article'
 
-import './index.less'
+import '../../static/assets/articleList.less'
 
 class Article extends Component{
   constructor(props) {

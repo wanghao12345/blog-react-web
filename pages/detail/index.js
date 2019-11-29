@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 
 import { getArticleDetail } from '../../api/article'
 
-import './index.less'
+import '../../static/assets/articleDetail.less'
 
 
 class ArticleDetail extends Component {
