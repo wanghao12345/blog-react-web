@@ -1,11 +1,11 @@
 import axios from 'axios'
 import Router from 'next/router'
-import {message } from 'antd'
+import { message } from 'antd'
 import { baseUrl } from './env'
 
 const serviceConfig = {
   baseURL: baseUrl,
-  timeout: 3000, // 超时处理
+  timeout: 10000, // 超时处理
   responseType: 'json',
   withCredentials: true, // 是否允许带cookie这些
   headers: {
@@ -28,7 +28,8 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
   response => {
-    if (response.data.code === 0) {
+    const status = response.data.status
+    if (status !== 200) {
       message.error(response.data.message)
     }
     return response.data

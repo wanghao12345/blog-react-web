@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { Form, Button, Checkbox, Input, Icon } from 'antd'
+import Router from 'next/router'
+import { Form, Button, Checkbox, Input, Icon, message } from 'antd'
+import { postLogin } from '../../api/user'
 import Layout from '../../components/Layout'
 import '../../static/assets/login.less'
 
 class Login extends Component {
   constructor (props) {
     super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   render () {
@@ -66,7 +69,15 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        postLogin(values).then(res => {
+          if (res.status === 200) {
+            message.success(res.message, 2, () => {
+              Router.push({
+                pathname: '/'
+              })
+            });
+          }
+        })
       }
     });
   };
