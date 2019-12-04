@@ -3,7 +3,7 @@ import Router from 'next/router'
 import { Form, Button, Checkbox, Input, Icon, message } from 'antd'
 import { postLogin } from '../../api/user'
 import Layout from '../../components/Layout'
-import style from '../../static/assets/login.less'
+import style from './index.less'
 
 class Login extends Component {
   constructor (props) {
@@ -16,7 +16,7 @@ class Login extends Component {
     return (
       <Layout>
         <div className={style['login-wrapper']}>
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form onSubmit={this.handleSubmit} className={style['login-form']}>
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: '请输入你的用户名!' }],
@@ -43,13 +43,13 @@ class Login extends Component {
               valuePropName: 'checked',
               initialValue: true,
             })(<Checkbox>记住账号</Checkbox>)}
-            <a className="login-form-forgot" href="">
+            <a className={style['login-form-forgot']} href="">
               忘记密码
             </a>
             <Button 
               type="primary" 
               htmlType="submit" 
-              className="login-form-button"
+              className={style['login-form-button']}
             >
               登录
             </Button>
