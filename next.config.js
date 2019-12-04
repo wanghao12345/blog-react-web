@@ -3,8 +3,9 @@ const withLess = require('@zeit/next-less');
 
 
 module.exports = withLess({
-  lessLoaderOptions: {
-    javascriptEnabled: true,
-    cssModules: true
-  }
+  cssModules: true,
+    cssLoaderOptions: {
+      importLoaders: 1,
+      localIdentName: "[local]___[hash:base64:5]",
+    }
 })

@@ -3,7 +3,7 @@ import Router from 'next/router'
 import { Form, Button, Checkbox, Input, Icon, message } from 'antd'
 import { postLogin } from '../../api/user'
 import Layout from '../../components/Layout'
-import '../../static/assets/login.less'
+import style from '../../static/assets/login.less'
 
 class Login extends Component {
   constructor (props) {
@@ -15,7 +15,7 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Layout>
-        <div className="login-wrapper">
+        <div className={style['login-wrapper']}>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
             {getFieldDecorator('username', {

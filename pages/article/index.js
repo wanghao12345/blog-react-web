@@ -10,7 +10,8 @@ import Router from 'next/router'
 import { connect } from 'react-redux'
 import { action } from '../../store/article'
 
-import '../../static/assets/articleList.less'
+import style from '../../static/assets/articleList.less'
+
 
 class Article extends Component{
   constructor(props) {
@@ -54,21 +55,21 @@ class Article extends Component{
     const articleItem = articles.map((item) => {
       return (
         <div 
-          className="article-item-box" 
+          className={style['article-item-box']} 
           key={item.id}
           onClick={this.handleRouterDetailClick(item.id)}
         >
-          <div className="article-item-img">
+          <div className={style['article-item-img']}>
             <img src={baseUrl + item.coverImage} alt="文章图片" />
           </div>
-          <div className="article-item-content">
-              <div className="article-item-title">{item.title}</div>
-              <div className="article-item-description">{item.description}</div>
-              <div className="article-item-status">
-                <div className="article-look"><Icon type="eye" />321</div>
-                <div className="article-commont"><Icon type="form" />4</div>
-                <div className="article-love"><Icon type="heart" />0</div>
-                <div className="article-time">
+          <div className={style['article-item-content']}>
+              <div className={style['article-item-title']}>{item.title}</div>
+              <div className={style['article-item-description']}>{item.description}</div>
+              <div className={style['article-item-status']}>
+                <div className={style['article-look']}><Icon type="eye" />321</div>
+                <div className={style['article-commont']}><Icon type="form" />4</div>
+                <div className={style['article-love']}><Icon type="heart" />0</div>
+                <div className={style['article-time']}>
                   {item.createTime}
                 </div>
               </div>
@@ -79,9 +80,9 @@ class Article extends Component{
 
     return (
       <Layout>
-        <div className="article-list-wrapper">
+        <div className={style['article-list-wrapper']}>
           { articleItem }
-          <div className="aricle-list-bottom">
+          <div className={style['aricle-list-bottom']}>
             {
               hasNextPage ? (<span onClick={this.handleLoadNextPage}>查看更多</span>) :
               (<span>已经到底了</span>)

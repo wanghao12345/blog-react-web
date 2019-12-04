@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Router from 'next/router'
 import { Button } from 'antd'
 import { getTypeList } from '../api/header'
-import '../static/assets/header.less'
+import style from '../static/assets/header.less'
 
 export default class Header extends Component{
 
@@ -28,27 +28,27 @@ export default class Header extends Component{
   render() {
     const { navList } = this.state
     return (
-      <div className="header-wrapper">
-        <div className="header-content-box">
-          <div className="left-header-box">
-            <div className="logo-box">
+      <div className={style['header-wrapper']}>
+        <div className={style['header-content-box']}>
+          <div className={style['left-header-box']}>
+            <div className={style['logo-box']}>
               <Link href="/">
                 <img src="/static/img/header/logo.jpg" alt="logo"/>
               </Link>
             </div>
-            <div className="type-box">
+            <div className={style['type-box']}>
               {
                 navList.map((item) => {
                   return (
                     <Link as={`/article/${item.id}`}  href={`/article?id=${item.id}`} key={item.id}>
-                      <span className="type-item">{item.name}</span>
+                      <span className={style['type-item']}>{item.name}</span>
                     </Link>
                   )
                 })
               }
             </div>
           </div>
-          <div className="right-header-box">
+          <div className={style['right-header-box']}>
             <Button
               type="primary"
               icon="login"

@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 
 import { getArticleDetail } from '../../api/article'
 
-import '../../static/assets/articleDetail.less'
+import style from '../../static/assets/articleDetail.less'
 
 
 class ArticleDetail extends Component {
@@ -29,22 +29,22 @@ class ArticleDetail extends Component {
     const { detaiData } = this.props
     return (
       <Layout>
-        <div className="detail-top">
+        <div className={style['detail-top']}>
           <h1>{detaiData.title}</h1>
-          <div className="detail-status">
-            <div className="left">
+          <div className={style['detail-status']}>
+            <div className={style['left']}>
               <span>阅读：404</span>
               <span>评论：4</span>
               <span>喜欢：4</span>
               <span>时间：{detaiData.createTime}</span>
             </div>
-            <div className="right">
+            <div className={style['right']}>
               <span>作者：管理员</span>
             </div>
           </div>
         </div>
         <div
-          className="mainContent"
+          className={style['mainContent']}
           dangerouslySetInnerHTML={{__html: detaiData.content}}
         ></div>
       </Layout>

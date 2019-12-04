@@ -3,8 +3,7 @@ import Footer from './footer'
 import Head from './Head'
 import { useEffect } from 'react'
 import '../static/assets/reset.less'
-import '../static/assets/layout.less'
-
+import style from '../static/assets/layout.less'
 
 
 
@@ -16,12 +15,12 @@ const Layout = (props) => {
   return (
     <div>
       <Header />
-      <div className="layout-wrapper">
+      <div className={style['layout-wrapper']}>
         <Head />
-        <div className="main-content-wrapper">
+        <div className={style['main-content-wrapper']}>
           {props.children}
         </div>
-        <div className="advert-wrapper"></div>
+        <div className={style['advert-wrapper']}></div>
       </div>
       <Footer />
     </div>
