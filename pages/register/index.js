@@ -5,7 +5,7 @@ import {
   Tooltip,
   Icon,
   Checkbox,
-  Button,
+  Button
 } from 'antd';
 
 import { postRegister } from '../../api/user'
@@ -132,7 +132,6 @@ class Register extends Component {
       </Layout>
     );
   }
-
   
   /**
    * 验证输入密码
@@ -171,7 +170,7 @@ class Register extends Component {
       if (!err) {
         console.log('Received values of form: ', values);
         postRegister(values).then(res => {
-          
+          console.log(res)
         })
       }
     });
