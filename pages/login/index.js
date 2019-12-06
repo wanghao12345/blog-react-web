@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Router from 'next/router'
+import Link from 'next/link'
 import { Form, Button, Checkbox, Input, Icon, message } from 'antd'
 import { postLogin } from '../../api/user'
 import Layout from '../../components/Layout'
@@ -53,7 +54,10 @@ class Login extends Component {
             >
               登录
             </Button>
-            或者 <a href="">注册!</a>
+            或者 
+            <Link href="/register">
+              <a>注册!</a>
+            </Link>
           </Form.Item>
         </Form>
         </div>

@@ -6,3 +6,10 @@ export const postLogin = (data) => axios({
   url: '/user/login',
   data
 })
+
+// 账号密码注册
+export const postRegister = (data) => axios({
+  method: 'post',
+  url: '/user/register',
+  data
+})
